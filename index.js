@@ -4,10 +4,12 @@ const bodyParser = require("body-parser");
 const app = express();
 const PORT = 3000;
 const crypto = require("crypto");
+const morgon = require("morgon");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(morgon("dev"));
 
 app.listen(PORT, () => {
   console.log("server listening on port 3000");
@@ -57,5 +59,3 @@ app.post("/users", (req, res) => {
   console.log(data.users.push(newUser));
   res.send("It's working");
 });
-
-//project b
