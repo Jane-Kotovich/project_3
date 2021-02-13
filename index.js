@@ -1,28 +1,35 @@
 const express = require("express");
-
-const index = express();
-const PORT = 3000;
 const data = require("./data.js");
-index.listen(PORT, () => {
+const bodyParser = require("body-parser");
+const app = express();
+const PORT = 3000;
+const crypto = require("crypto");
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+app.listen(PORT, () => {
   console.log("server listening on port 3000");
 });
-index.get("/", (req, res) => {
+app.get("/", (req, res) => {
   res.send("Welcome to our schedule website");
 });
 
-index.get("/users", (req, res) => {
+app.get("/users", (req, res) => {
   res.json(data.users);
 });
 
-index.get("/schedules", (req, res) => {
+app.get("/schedules", (req, res) => {
   res.json(data.schedules);
 });
 
-index.get("/users/:userid", (req, res) => {
+app.get("/users/:userid", (req, res) => {
+  // console.log(data.users[req.params.userid]);
   res.json(data.users[req.params.userid]);
 });
 
-index.get("/users/:userid/schedules", (req, res) => {
+app.get("/users/:userid/schedules", (req, res) => {
   const results = [];
   const userId = Number(req.params.userid);
 
@@ -34,4 +41,19 @@ index.get("/users/:userid/schedules", (req, res) => {
     }
   }
   res.json(results);
+});
+
+app.post("/users", (req, res) => {
+  console.log(req.body);
+  const psw = req.body.password;
+  const passwordEncr = crypto.createHash("sha256").update(psw).digest("hex");
+  const newUser = {
+    firstname: req.body.firstname,
+    lastname: req.body.lastname,
+    email: req.body.email,
+    password: passwordEncr,
+  };
+  console.log(newUser);
+  console.log(data.users.push(newUser));
+  res.send("It's working");
 });
