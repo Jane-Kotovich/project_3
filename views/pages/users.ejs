@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>List of all users</title>
+  </head>
+  <body>
+    <h1>USERS</h1>
+    <h3>Here are list of all the users</h3>
+    <ul>
+      <% for (let i=0; i<usersList.length; i++) { %>
+          <li>User № <%=(i+1)%> name: <b><%= usersList[i].firstname %></b> surname: <b><%= usersList[i].lastname %></b> email: <b><%= usersList[i].email %></b>  </li>
+         
+          <% } %>
+    </ul>
+  </body>
+</html>

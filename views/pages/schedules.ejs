@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>List of all schedules</title>
+  </head>
+  <body>
+    <h1>Shedules</h1>
+    <h3>Here are list of all the shedules</h3>
+    <table>
+        <tr>
+        <th>Who:</th>
+        <th>When:</th>
+        <th>Start:</th>
+        <th>Finish:</th>
+        </tr>
+       
+        <% for (let i=0; i<schList.length; i++) { %>
+            
+            <tr>
+            <td><b><%=usersList[(schList[i].user_id)].firstname%> <%=usersList[(schList[i].user_id)].lastname%></b></td>
+            <td><%=schList[i].day%></td>
+            <td><%=schList[i].start_at%></td>
+            <td><%=schList[i].end_at%></td>
+            </tr>
+    
+        <% } %>
+        
+    </table>
+  </body>
+</html>

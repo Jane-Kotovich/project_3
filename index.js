@@ -4,31 +4,45 @@ const bodyParser = require("body-parser");
 const app = express();
 const PORT = 3000;
 const crypto = require("crypto");
-const morgon = require("morgon");
+const morgan = require("morgan");
+const { body, validationResult } = require("express-validator");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(morgon("dev"));
+app.use(morgan("dev"));
+app.set("view engine", "ejs");
 
 app.listen(PORT, () => {
   console.log("server listening on port 3000");
 });
 app.get("/", (req, res) => {
-  res.send("Welcome to our schedule website");
+  res.render("pages/index");
 });
 
 app.get("/users", (req, res) => {
-  res.json(data.users);
+  const usersList = data.users;
+  res.render("pages/users", {
+    usersList: usersList,
+  });
 });
 
 app.get("/schedules", (req, res) => {
-  res.json(data.schedules);
+  const schList = data.schedules;
+  const usersList = data.users;
+  res.render("pages/schedules", {
+    schList: schList,
+    usersList: usersList,
+  });
 });
 
 app.get("/users/:userid", (req, res) => {
-  // console.log(data.users[req.params.userid]);
-  res.json(data.users[req.params.userid]);
+  const userId = req.params.userid;
+  const userIdInfo = data.users[req.params.userid];
+  res.render("pages/userid", {
+    userId: userId,
+    userIdInfo: userIdInfo,
+  });
 });
 
 app.get("/users/:userid/schedules", (req, res) => {
@@ -42,10 +56,15 @@ app.get("/users/:userid/schedules", (req, res) => {
       results.push(schedule);
     }
   }
-  res.json(results);
+  const usersList = data.users;
+  res.render("pages/schid", {
+    results: results,
+    usersList: usersList,
+    userId: userId,
+  });
 });
 
-app.post("/users", (req, res) => {
+app.post("/users/new", (req, res) => {
   console.log(req.body);
   const psw = req.body.password;
   const passwordEncr = crypto.createHash("sha256").update(psw).digest("hex");
@@ -58,4 +77,5 @@ app.post("/users", (req, res) => {
   console.log(newUser);
   console.log(data.users.push(newUser));
   res.send("It's working");
+  res.render("pages/usersnew");
 });

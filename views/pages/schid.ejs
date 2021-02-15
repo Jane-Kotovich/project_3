@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Schedule for choosen user</title>
+  </head>
+  <body>
+    <h1>Schedule for choosen user</h1>
+    <h3>For <b><%=usersList[userId].firstname%> <%=usersList[userId].lastname%></h3>
+        <%for(let i=0; i<results.length; i++) {%>
+        <ul>
+            <li>user id: <%=results[i].user_id%>; day: <%=results[i].day%>; starts at: <%=results[i].start_at%>; ends at: <%=results[i].end_at%> </li>
+        </ul>
+    <%}%>
+  </body>
+</html>
