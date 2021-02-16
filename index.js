@@ -82,12 +82,15 @@ app.post("/users", (req, res) => {
 });
 
 app.get("/schedules/new", (req, res) => {
-  res.render("pages/schnew");
+  const usersList = data.users;
+
+  res.render("pages/schnew", {
+    usersList: usersList,
+    // userId: userId,
+  });
 });
 
 app.post("/schedules", (req, res) => {
-  // const user_id = Number(req.body.user_id);
-  // const day = Number(req.body.day);
   const newSchedule = {
     user_id: req.body.user_id,
     day: req.body.day,
