@@ -36,7 +36,7 @@ app.get("/schedules", (req, res) => {
   });
 });
 
-app.get("/users/:userid", (req, res) => {
+app.get("/users/:userid(\\d+)/", (req, res) => {
   const userId = req.params.userid;
   const userIdInfo = data.users[req.params.userid];
   res.render("pages/userid", {
@@ -64,8 +64,11 @@ app.get("/users/:userid/schedules", (req, res) => {
   });
 });
 
-app.post("/users/new", (req, res) => {
-  console.log(req.body);
+app.get("/users/new", (req, res) => {
+  res.render("pages/usersnew");
+});
+
+app.post("/users", (req, res) => {
   const psw = req.body.password;
   const passwordEncr = crypto.createHash("sha256").update(psw).digest("hex");
   const newUser = {
@@ -74,8 +77,23 @@ app.post("/users/new", (req, res) => {
     email: req.body.email,
     password: passwordEncr,
   };
-  console.log(newUser);
-  console.log(data.users.push(newUser));
-  res.send("It's working");
-  res.render("pages/usersnew");
+  data.users.push(newUser);
+  res.redirect("/users");
+});
+
+app.get("/schedules/new", (req, res) => {
+  res.render("pages/schnew");
+});
+
+app.post("/schedules", (req, res) => {
+  // const user_id = Number(req.body.user_id);
+  // const day = Number(req.body.day);
+  const newSchedule = {
+    user_id: req.body.user_id,
+    day: req.body.day,
+    start_at: req.body.start_at,
+    end_at: req.body.end_at,
+  };
+  data.schedules.push(newSchedule);
+  res.redirect("/schedules");
 });
