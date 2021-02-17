@@ -11,19 +11,21 @@
     <h3>Here are list of all the shedules</h3>
     <table>
         <tr>
-        <th>Who:</th>
+        <th>Name:</th>
+        <th>Surname</th>
         <th>When:</th>
         <th>Start:</th>
         <th>Finish:</th>
         </tr>
        
-        <% for (let i=0; i<schList.length; i++) { %>
+        <% for (let i=0; i<schedule.length; i++) { %>
             
             <tr>
-            <td><b><%=usersList[(schList[i].user_id)].firstname%> <%=usersList[(schList[i].user_id)].lastname%></b></td>
-            <td><%=schList[i].day%></td>
-            <td><%=schList[i].start_at%></td>
-            <td><%=schList[i].end_at%></td>
+            <td><b><%=schedule[i].firstname%> </b></td>
+            <td><b><%=schedule[i].lastname%></b></td>
+            <td><%=schedule[i].week_day%></td>
+            <td><%=schedule[i].start_time%></td>
+            <td><%=schedule[i].end_time%></td>
             </tr>
     
         <% } %>

@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "create-tables": "psql jane -h localhost -d schedule -f sql/create_schedule_table.sql",
+    "seed-tables": "psql jane -h localhost -d schedule -f sql/seed_schedule_table.sql",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

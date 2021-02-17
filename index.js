@@ -6,6 +6,8 @@ const PORT = 3000;
 const crypto = require("crypto");
 const morgan = require("morgan");
 const { body, validationResult } = require("express-validator");
+const database = require("./database");
+// app.use("/static", express.static(path.join(__dirname, "public")));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -28,11 +30,36 @@ app.get("/users", (req, res) => {
 });
 
 app.get("/schedules", (req, res) => {
-  const schList = data.schedules;
-  const usersList = data.users;
-  res.render("pages/schedules", {
-    schList: schList,
-    usersList: usersList,
+  database
+    .any("SELECT * from schedule;")
+    .then((usersSchedule) => {
+      res.render("pages/schedules", {
+        schedule: usersSchedule,
+      });
+    })
+    .catch((err) => {
+      console.error(err);
+      res.render("pages/error", {
+        err: err,
+      });
+    });
+});
+
+app.get("/schedules", (req, res) => {
+  // const schList = data.schedules;
+  // const usersList = data.users;
+  database.any("SELECT * from schedule;").then((usersSchedule) => {
+    res
+      .render("pages/schedules", {
+        schedule: usersSchedule,
+        // schList: schList,
+        // usersList: usersList,
+      })
+      .catch((err) => {
+        res.render("/pages/error", {
+          err: err,
+        });
+      });
   });
 });
 
