@@ -95,3 +95,8 @@ form > .button {
 ul {
   list-style-type: none;
 }
+.cat_fly {
+  display: block;
+  width: 30vw;
+  margin: 3vh auto;
+}
