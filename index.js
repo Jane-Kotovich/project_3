@@ -6,24 +6,32 @@ const PORT = 3000;
 const crypto = require("crypto");
 const morgan = require("morgan");
 const { body, validationResult } = require("express-validator");
+const path = require("path");
+const expressLayouts = require("express-ejs-layouts");
 
+// app.use(express.static("public"));
+// app.use("/main", express.static(__dirname + "public/main"));
+app.use("/static", express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(morgan("dev"));
+app.use(expressLayouts);
 app.set("view engine", "ejs");
+app.set("layout", "./layouts/full-width");
 
 app.listen(PORT, () => {
   console.log("server listening on port 3000");
 });
 app.get("/", (req, res) => {
-  res.render("pages/index");
+  res.render("pages/index", { title: "Home Page" });
 });
 
 app.get("/users", (req, res) => {
   const usersList = data.users;
   res.render("pages/users", {
     usersList: usersList,
+    title: "Users list",
   });
 });
 
@@ -33,6 +41,7 @@ app.get("/schedules", (req, res) => {
   res.render("pages/schedules", {
     schList: schList,
     usersList: usersList,
+    title: "Schedules list",
   });
 });
 
@@ -42,6 +51,7 @@ app.get("/users/:userid(\\d+)/", (req, res) => {
   res.render("pages/userid", {
     userId: userId,
     userIdInfo: userIdInfo,
+    title: "Exact user",
   });
 });
 
@@ -61,11 +71,14 @@ app.get("/users/:userid/schedules", (req, res) => {
     results: results,
     usersList: usersList,
     userId: userId,
+    title: "Schedule for choosen user",
   });
 });
 
 app.get("/users/new", (req, res) => {
-  res.render("pages/usersnew");
+  res.render("pages/usersnew", {
+    title: "New user",
+  });
 });
 
 app.post("/users", (req, res) => {
@@ -82,7 +95,9 @@ app.post("/users", (req, res) => {
 });
 
 app.get("/schedules/new", (req, res) => {
-  res.render("pages/schnew");
+  res.render("pages/schnew", {
+    title: "Add new schedule",
+  });
 });
 
 app.post("/schedules", (req, res) => {
