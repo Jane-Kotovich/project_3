@@ -1,0 +1,97 @@
+body {
+  margin: 0;
+  min-height: 100vh;
+  box-sizing: border-box;
+  background-image: url("cats.jpg");
+  background-repeat: repeat;
+  display: grid;
+  grid-template: 1fr 90vh 1fr/ 1fr;
+  grid-template-areas:
+    "header "
+    "main"
+    "footer";
+
+  justify-content: center;
+}
+header {
+  grid-area: header;
+}
+.wrapper {
+  grid-area: main;
+}
+footer {
+  grid-area: footer;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+form,
+header,
+footer,
+li {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  color: #420f54;
+  text-align: center;
+}
+h1,
+h2,
+header,
+footer {
+  text-transform: uppercase;
+}
+.wrapper {
+  width: 80vw;
+  margin: 5vh auto;
+  background-size: contain;
+  margin: 5vh auto;
+  background-color: #fcdede;
+  padding: 0;
+}
+
+header,
+footer {
+  background-color: #fcf7f3;
+  padding: 20px;
+  width: 100vw;
+  font-weight: 600;
+  font-size: 2em;
+}
+
+main {
+  background-color: #fcdede;
+  padding: 20px;
+}
+
+form {
+  display: block;
+  width: 50vw;
+  margin: 0 auto;
+}
+
+input {
+  background-color: #fcf7f3;
+  border: none;
+  padding: 10px 20px;
+  width: 50vw;
+  color: #420f54;
+  margin: 1.5em 0;
+}
+form > .button {
+  display: block;
+  margin: 1.5em auto;
+  padding: 1.3em 2em;
+  border: none;
+  background-color: #d3afd5;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 5px;
+  width: 22vw;
+  box-shadow: 0 8px 6px -6px #6a7b8b;
+}
+ul {
+  list-style-type: none;
+}
