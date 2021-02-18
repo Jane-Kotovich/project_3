@@ -80,7 +80,7 @@ input {
   color: #420f54;
   margin: 1.5em 0;
 }
-form > button {
+form > .button {
   display: block;
   margin: 1.5em auto;
   padding: 1.3em 2em;
