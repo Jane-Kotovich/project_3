@@ -3,6 +3,7 @@ const express = require("express");
 const index = express();
 const PORT = 3000;
 const data = require("./data.js");
+
 index.listen(PORT, () => {
   console.log("server listening on port 3000");
 });
