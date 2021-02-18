@@ -7,7 +7,6 @@ const crypto = require("crypto");
 const morgan = require("morgan");
 const { body, validationResult } = require("express-validator");
 const database = require("./database");
-// app.use("/static", express.static(path.join(__dirname, "public")));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -26,40 +25,6 @@ app.get("/users", (req, res) => {
   const usersList = data.users;
   res.render("pages/users", {
     usersList: usersList,
-  });
-});
-
-app.get("/schedules", (req, res) => {
-  database
-    .any("SELECT * from schedule;")
-    .then((usersSchedule) => {
-      res.render("pages/schedules", {
-        schedule: usersSchedule,
-      });
-    })
-    .catch((err) => {
-      console.error(err);
-      res.render("pages/error", {
-        err: err,
-      });
-    });
-});
-
-app.get("/schedules", (req, res) => {
-  // const schList = data.schedules;
-  // const usersList = data.users;
-  database.any("SELECT * from schedule;").then((usersSchedule) => {
-    res
-      .render("pages/schedules", {
-        schedule: usersSchedule,
-        // schList: schList,
-        // usersList: usersList,
-      })
-      .catch((err) => {
-        res.render("/pages/error", {
-          err: err,
-        });
-      });
   });
 });
 
@@ -108,22 +73,53 @@ app.post("/users", (req, res) => {
   res.redirect("/users");
 });
 
+app.get("/schedules", (req, res) => {
+  database
+    .any("SELECT * from schedule;")
+    .then((usersSchedule) => {
+      res.render("pages/schedules", {
+        schedule: usersSchedule,
+      });
+    })
+    .catch((err) => {
+      console.error(err);
+      res.render("pages/error", {
+        err: err,
+      });
+    });
+});
+
 app.get("/schedules/new", (req, res) => {
   const usersList = data.users;
-
   res.render("pages/schnew", {
     usersList: usersList,
-    // userId: userId,
   });
 });
 
 app.post("/schedules", (req, res) => {
-  const newSchedule = {
-    user_id: req.body.user_id,
-    day: req.body.day,
-    start_at: req.body.start_at,
-    end_at: req.body.end_at,
-  };
-  data.schedules.push(newSchedule);
-  res.redirect("/schedules");
+  const newSchedule = [
+    req.body.firstname,
+    req.body.lastname,
+    req.body.week_day,
+    req.body.start_time,
+    req.body.end_time,
+  ];
+
+  const sql =
+    "INSERT INTO schedule (firstname, lastname, week_day, start_time, end_time) VALUES ($1, $2, $3, $4, $5)";
+  database
+    .query(sql, newSchedule)
+    .then((schedule) => {
+      res.redirect("/schedules");
+    })
+    .catch((err) => {
+      console.error(err);
+      res.render("pages/error", {
+        err: err,
+      });
+    });
 });
+
+// data.schedules.push(newSchedule);
+// res.redirect("/schedules");
+// });
