@@ -9,8 +9,6 @@ const { body, validationResult } = require("express-validator");
 const path = require("path");
 const expressLayouts = require("express-ejs-layouts");
 
-// app.use(express.static("public"));
-// app.use("/main", express.static(__dirname + "public/main"));
 app.use("/static", express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
