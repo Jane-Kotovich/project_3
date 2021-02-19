@@ -7,7 +7,7 @@
     <title>Add a new schedule</title>
   </head>
   <body>
-    <form action="/schedules" method="post">
+    <form action="/new" method="post">
       <label for="firstname">Firstname:</label>
       <input type="text" id="firstname" name="firstname" />
       <label for="lastname">Secondname:</label>
@@ -29,5 +29,6 @@
       <input type="text" id="end_time" name="end_time" />
       <input class="button" type="submit" value="SUBMIT" />
     </form>
+    <button><a href="/schedules">CHECK ALL SCHEDULES</a></button>
   </body>
 </html>

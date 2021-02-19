@@ -98,7 +98,7 @@ app.get("/schedules", (req, res) => {
     });
 });
 
-app.get("/schedules/new", (req, res) => {
+app.get("/new", (req, res) => {
   const usersList = data.users;
   res.render("pages/schnew", {
     usersList: usersList,
@@ -106,7 +106,7 @@ app.get("/schedules/new", (req, res) => {
   });
 });
 
-app.post("/schedules", (req, res) => {
+app.post("/new", (req, res) => {
   const newSchedule = [
     req.body.firstname,
     req.body.lastname,
