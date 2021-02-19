@@ -72,7 +72,8 @@ form {
   margin: 0 auto;
 }
 
-input {
+input,
+select {
   background-color: #fcf7f3;
   border: none;
   padding: 10px 20px;
