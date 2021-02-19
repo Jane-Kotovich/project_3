@@ -93,20 +93,24 @@ app.post("/users", (req, res) => {
 });
 
 app.get("/schedules/new", (req, res) => {
+  const usersList = data.users;
   res.render("pages/schnew", {
     title: "Add new schedule",
+    usersList: usersList,
   });
 });
 
 app.post("/schedules", (req, res) => {
   // const user_id = Number(req.body.user_id);
   // const day = Number(req.body.day);
+
   const newSchedule = {
     user_id: req.body.user_id,
     day: req.body.day,
     start_at: req.body.start_at,
     end_at: req.body.end_at,
   };
+
   data.schedules.push(newSchedule);
   res.redirect("/schedules");
 });

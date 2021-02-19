@@ -32,7 +32,8 @@ p,
 form,
 header,
 footer,
-li {
+li,
+table {
   font-family: Georgia, "Times New Roman", Times, serif;
   color: #420f54;
   text-align: center;
@@ -72,13 +73,16 @@ form {
   margin: 0 auto;
 }
 
-input {
+input,
+select {
   background-color: #fcf7f3;
   border: none;
   padding: 10px 20px;
   width: 50vw;
   color: #420f54;
   margin: 1.5em 0;
+  border-radius: 5px;
+  box-shadow: 0 8px 6px -6px #6a7b8b;
 }
 form > .button {
   display: block;
@@ -94,4 +98,15 @@ form > .button {
 }
 ul {
   list-style-type: none;
+}
+.cat_fly {
+  display: block;
+  width: 30vw;
+  margin: 3vh auto;
+}
+table {
+  display: block;
+  margin: 5em auto;
+  width: 40vw;
+  border-spacing: 2em 3em;
 }
